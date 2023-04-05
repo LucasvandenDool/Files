@@ -1,33 +1,34 @@
 __winc_id__ = "ae539110d03e49ea8738fd413ac44ba8"
 __human_name__ = "files"
 
-import os
-import shutil
-from zipfile import ZipFile
+import os 
+import shutil 
+from zipfile import ZipFile 
 
-os.chdir('C:\\Users\\lucas\\Winc\\files')
+
+cache = os.path.join(os.getcwd(), 'files', 'cache')
+
 
 #Clean Cache \\\\\\\\
 def clean_cache():
-    path = 'C:\\Users\\lucas\\Winc\\files\\cache'
-    if os.path.exists('cache'):
-        shutil.rmtree(path)    
-    os.makedirs('cache')
-    
+    if os.path.exists(cache):
+        shutil.rmtree(cache)
+    return os.mkdir(cache)
+
 #Zip Cache \\\\\\\\
-zip_path = 'C:\\Users\\lucas\\Winc\\files\\data.zip'
+zip_path = os.getcwd()
 
 def cache_zip(zip_path, cache_path):
     with ZipFile(zip_path, 'r') as zip:
         zip.extractall(cache_path)
 
 #Cached Files \\\\\\\\
-cache = os.path.abspath("cache")
+cached = os.path.abspath(cache)
 
 def cached_files():
     lijst = []
-    for file in os.listdir(cache):
-        absolute_path = os.path.join(cache, file)
+    for file in os.listdir(cached):
+        absolute_path = os.path.join(cached, file)
         lijst.append(absolute_path)
     return lijst
 
